@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   Login(){
-  
+     this.router.navigateByUrl("/")
   }
 
 }

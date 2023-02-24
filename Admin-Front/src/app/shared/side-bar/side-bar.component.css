@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.menu-bar{width: 350px; height: 100%; border: 2px solid #ddd}
+.title-container{ height: 90px; position: relative;}
+.title-container label{ font-family: Poppins;font-style: normal;font-weight: 900; color: #0A7BC1; font-size: 2.0rem;line-height: 64px;display: block;position: absolute;top: 25px;left: 35px;}
+.menu-options { height: 66%; width: 100%; padding: 40px 8px 8px 8px;}
+.menu-option {  height: 50px;margin: 24px; display: flex;border-radius: 8px;}
+.menu-option label {font-family: 'Poppins'; align-self: center;font-size: 0.90em;display: block;}
+.icon-votantes {background-image: url('../assets/votantes_black.svg');height: 45px;width: 65px;background-size: auto 50%;background-position: center;background-repeat: no-repeat;margin: 2px 0px 0 0;display: block;}
+.icon-elecciones {background-image:url('../assets/elecciones_black.svg'); height: 45px;width: 65px;background-size: auto 50%;background-position: center;background-repeat: no-repeat;margin: 2px 0px 0 0;display: block;}
+.icon-proceso {background-image:url('../assets/proceso_electoral_black.svg');height: 45px;width: 65px;background-size: auto 50%;background-position: center;background-repeat: no-repeat;margin: 2px 0px 0 0;display: block;}
+.menu-option:hover{background-color: #D5E6FB;}
+.content {width: 100%; height: 100%; background-color: #F0F8FF;}
+.content-up {height: 90px; width: 100%; background-color: white;}
+.content-end {height: 86%; width: 100%; background-color: #F0F8FF; padding: 45px;}
+.form {height: 100%; width: 100%; background-color: white; border-radius: 8px;}
