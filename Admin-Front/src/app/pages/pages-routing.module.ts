@@ -9,7 +9,11 @@ const routes: Routes = [
   children:[
     {
       path: 'proceso', loadChildren:()=> import('./main-page/proceso/proceso.module').then(m=>m.ProcesoModule)
+    },
+    {
+      path: 'registro', loadChildren:()=> import('./main-page/registro/registro.module').then(m=>m.RegistroModule)
     }
+    
     
   ]
 
