@@ -20,7 +20,6 @@ export class RegistroComponent implements OnInit {
     this.name = name;
   }
   getFile( event: any){
-    alert();
     this.file = event.target.files[0];
     let fileList = document.getElementById("files-list")??new HTMLElement;
     fileList.innerHTML = "";
@@ -40,12 +39,13 @@ export class RegistroComponent implements OnInit {
     fileList.appendChild(listItem);
     $(".button-upload").addClass("hidden");
     $(".remove-file").removeClass("hidden");
-   
+    $(".button-next-container").removeClass("hidden");
   }
   removeFile(){
       $(".file-name").val("");
       $(".remove-file").addClass("hidden");
       $(".button-upload").removeClass("hidden");
+      $(".button-next-container").addClass("hidden");
       let fileList = document.getElementById("files-list")??new HTMLElement;
       fileList.firstElementChild?.remove();
       this.file =null;
@@ -61,12 +61,14 @@ export class RegistroComponent implements OnInit {
     $(".form").removeClass("blur");
   }
   uploadFile(){
-    
+
     if(this.file != null ||this.file != "" ){
-     
+
         let formData = new FormData();
+        
         formData.append('ArchivoExcel',this.file)
         // formData.append('name',file)
+
         var response =  axios({
         url: "https://localhost:7101/api/Votantes/CargarParticipantes",
         method: "POST",
@@ -89,7 +91,6 @@ export class RegistroComponent implements OnInit {
       })
       .catch(function (error) {
         console.log(error);
-
       });
 
     }

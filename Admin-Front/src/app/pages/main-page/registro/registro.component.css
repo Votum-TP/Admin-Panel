@@ -1,8 +1,9 @@
-.content-end {height: 100%; width: 1166px; background-color: #F0F8FF; padding: 25px;}
-.form-content {max-width: 50%; margin: auto;}
-.form {height: 100%; width: 100%; background-color: white; border-radius: 8px;}
+.content-end {height: 100%; width: 1000px; background-color: #F0F8FF; padding: 25px;}
+.form-content {max-width: 60%; margin: auto;}
+.form {height: 100%; width: 99%; background-color: white; border-radius: 8px;}
 .date-columns {display: flex; gap: 50px;}
 .fecha {width: 200px;}
+.hidden {display: none;}
 
 /*INPUTS*/
 input, textarea, select {font-size: 0.75em; -webkit-appearance: none; -moz-appearance: none; border: none; line-height: initial !important;}
@@ -14,11 +15,10 @@ input[type="submit"] {cursor: pointer;}
 input[type="file"] {display: none;}
 .file-upload {display: flex;}
 .file-upload .file-name {width: 70%; font-family: Poppins;}
-.hidden {display: none;}
 .file-upload .hidden {display: none;}
-.button-upload{background-color: #3F468F;cursor: pointer; border-radius: 8px;color: white;font-weight: 300;text-align: center;margin: auto;width: 110px;}
-.button-next{display: block;line-height: 35px;font-weight: 600;font-size: .7em; background-color: #3F468F;cursor: pointer; border-radius: 8px;color: white;font-weight: 600;text-align: center;margin-top: 100px;float: right;width: 110px;}
-.remove-file {background-color: #F45B69;cursor: pointer; border-radius: 8px;color: white;font-weight: 300;text-align: center;margin: auto;width: 110px;    font-family: 'Poppins';display: block;line-height: 35px;font-weight: 600;font-size: .7em;margin: auto;text-align: center;}
+.button-upload{background-color: #3F468F;cursor: pointer; border-radius: 8px;color: white;font-weight: 300;text-align: center;margin: auto;padding: 2px 20px 1px 15px;}
+.button-next{display: block;line-height: 35px;font-weight: 600;font-size: .8em; background-color: #3F468F;cursor: pointer; border-radius: 8px;color: white;font-weight: 600;text-align: center;margin-top: 100px;float: right;width: 110px;}
+.remove-file {background-color: #F45B69;cursor: pointer; border-radius: 8px;color: white;font-weight: 300;text-align: center;margin: auto;   font-family: 'Poppins';display: block;font-weight: 600;font-size: .8em;margin: auto;text-align: center; padding: 8px 20px 10px 15px;}
 .files-list {margin-top: 30px}
 textarea {height: 60px; padding: 5px 18px; transition: none; -webkit-transition: none; -moz-transition: none; -o-transition: none;}
 select[size] {background: var(--white-color); border-radius: 2px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); overflow: auto;}
@@ -28,7 +28,7 @@ input.icon-input {padding-right: 32px; background-position: calc(100% - 10px) ce
 input.error, textarea.error, select.error {border-color: red !important;}
 label {font-family: Poppins;}
 .form-field { padding: 5px;}
-.form-field label {display: block;line-height: 35px; font-weight: 600; font-size: .7em;}
+.form-field label {display: block;line-height: 35px; font-weight: 600; font-size: .8em;}
 .form-field input {width: 100%;}
 input, textarea, select {font-size: 0.75em; -webkit-appearance: none; -moz-appearance: none; border: none; line-height: initial !important;}
 input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), select, textarea {background-color: #fff; border-radius: 8px;}

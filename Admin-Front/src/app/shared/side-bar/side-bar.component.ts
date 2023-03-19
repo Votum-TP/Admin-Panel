@@ -16,5 +16,7 @@ export class SideBarComponent implements OnInit {
   registroNavigate(){
     this.router.navigate(['/registro']);
   }
-
+  procesoNavigate(){
+    this.router.navigate(['/proceso']);
+  }
 }
