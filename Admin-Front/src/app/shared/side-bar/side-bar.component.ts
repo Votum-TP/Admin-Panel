@@ -19,4 +19,7 @@ export class SideBarComponent implements OnInit {
   procesoNavigate(){
     this.router.navigate(['/proceso']);
   }
+  eleccionesNavigate(){
+    this.router.navigate(['/listado']);
+  }
 }

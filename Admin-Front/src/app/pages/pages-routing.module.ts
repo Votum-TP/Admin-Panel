@@ -12,9 +12,10 @@ const routes: Routes = [
     },
     {
       path: 'registro', loadChildren:()=> import('./main-page/registro/registro.module').then(m=>m.RegistroModule)
-    }
-    
-    
+    },
+    {
+      path: 'listado',loadChildren:()=> import('./main-page/listado/listado.module').then(m=>m.ListadoModule)
+    } 
   ]
 
   }
