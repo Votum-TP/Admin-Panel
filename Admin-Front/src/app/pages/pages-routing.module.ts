@@ -9,8 +9,10 @@ const routes: Routes = [
   children:[
     {
       path: 'proceso', loadChildren:()=> import('./main-page/proceso/proceso.module').then(m=>m.ProcesoModule)
+    },
+    {
+      path: 'listado', loadChildren:()=> import('./main-page/listado/listado.module').then(m=>m.ListadoModule)
     }
-    
   ]
 
   }

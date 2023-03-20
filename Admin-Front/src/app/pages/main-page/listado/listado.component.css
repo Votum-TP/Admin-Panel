@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+  }
+  
+  .pointer {
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .wrapper {
+    margin-top: 5px;
+  }
+  
+  :host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .mat-success {
+    background-color: green;
+    color: #fff;
+  }
+  
+  .pointer-icon {
+    cursor: pointer;
+  }
+  
+  .icon-color {
+    background-color: #3f51b5;
+    color: #fff;
+  }
