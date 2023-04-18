@@ -11,16 +11,16 @@
                 </div>
                 <div class="form-field">
                     <label class="left">Descripción (*)</label>
-                    <textarea required name="Descripcion" class="Descripcion" value="" placeholder="Descripcion"></textarea>
+                    <textarea  id="Descripcion" class="Descripcion"  placeholder="Descripcion"></textarea>
                 </div>
                 <div class="date-columns">
                     <div class="form-field">
                         <label class="fecha">Fecha de inicio (*)</label>
-                        <input required type="date" class="fechaInicio" name="trip-start"value="2018-07-22"min="2018-01-01" max="2018-12-31">
+                        <input required type="date" class="FechaInicio" name="trip-start"value="2023-03-20">
                     </div>
                     <div class="form-field">
                        <label class="fecha">Fecha de fin (*)</label>
-                       <input required type="date" class="fechaFin" name="trip-start"value="2018-07-22"min="2018-01-01" max="2018-12-31">
+                       <input required type="date" class="FechaFin" name="trip-start"value="2023-03-20">
                    </div>
                 </div>
             </form>
@@ -68,10 +68,10 @@
                 <div cdkDropList
                   class="col-6"
                   #ln1="cdkDropList"
-                  [cdkDropListData]="ExcelData"
+                  [cdkDropListData]="ExcelDataPartidos"
                   
                   (cdkDropListDropped)="drop($event)">
-                  <div cdkDrag class=" drag-drop-elements" *ngFor="let n of ExcelData">
+                  <div cdkDrag class=" drag-drop-elements" *ngFor="let n of ExcelDataPartidos">
                     <a><img src={{n.Imagen}} style="width:45px;height:45px;"></a>
                     <div class="partido-info">
                         <label>{{n.Nombre}}</label>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery"
 import axios from 'axios';
+import { VotantesService } from 'src/app/services/votantes/votantes.service';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-registro',
@@ -9,13 +11,16 @@ import axios from 'axios';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service : VotantesService) { }
 
   ngOnInit(): void {
   }
   
   name: string= '';
   file: any;
+  fileReader: any;
+  ExcelData: any;
+
   getName( name: string){
     this.name = name;
   }
@@ -40,6 +45,16 @@ export class RegistroComponent implements OnInit {
     $(".button-upload").addClass("hidden");
     $(".remove-file").removeClass("hidden");
     $(".button-next-container").removeClass("hidden");
+
+    this.fileReader = new FileReader();
+    this.fileReader.readAsBinaryString(this.file);
+    //Lectura de excel de votantes
+    this.fileReader.onload = () =>{
+      var workbook = XLSX.read(this.fileReader.result,{type:'binary'});
+      var SheetNames = workbook.SheetNames;
+      this.ExcelData = XLSX.utils.sheet_to_json(workbook.Sheets[SheetNames[0]])
+      } 
+
   }
   removeFile(){
       $(".file-name").val("");
@@ -63,36 +78,18 @@ export class RegistroComponent implements OnInit {
   uploadFile(){
 
     if(this.file != null ||this.file != "" ){
-
-        let formData = new FormData();
-        
-        formData.append('ArchivoExcel',this.file)
-        // formData.append('name',file)
-
-        var response =  axios({
-        url: "https://localhost:7101/api/Votantes/CargarParticipantes",
-        method: "POST",
-        headers:{
-          'Content-Type': 'multipart/form-data'
-        },
-        data: formData
-      }).then(function (response) {
-        console.log(response);
-        if(response.data.code == 200){
-          $(".popup-title").html("¡Guardado exitoso!");
-
-        }else{
-          $(".popup-title").html("Error en el guardado");
-        }
+      if(!this.ExcelData[0].hasOwnProperty('Codigo'))
+      {
+        $(".popup-title").html("Formato incorrecto");
+        $(".popup-description").html("Cargue un excel con el formato indicado para los votantes");
         $(".popup").addClass("active");
         $(".form").addClass("blur");
-        $(".popup-description").html(response.data.mensaje);
-        
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
+       
+      }else{
+        let formData = new FormData();
+        formData.append('ArchivoExcel',this.file)
+        this.service.postVotante(formData);
+      }
     }
   }
 

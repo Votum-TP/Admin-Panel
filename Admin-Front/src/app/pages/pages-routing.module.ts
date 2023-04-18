@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  {path:'',loadChildren: ()=> import('./login/login.module').then(m=>m.LoginModule)},
   {path: 'login', loadChildren: ()=> import('./login/login.module').then(m=>m.LoginModule)},
-  {path:'',
+  {path:'Votum',
   component: MainPageComponent, 
   children:[
     {
@@ -12,12 +13,17 @@ const routes: Routes = [
     },
     {
       path: 'registro', loadChildren:()=> import('./main-page/registro/registro.module').then(m=>m.RegistroModule)
+    },
+    {
+      path: 'elecciones', loadChildren:()=> import('./main-page/elecciones/elecciones.module').then(m=>m.EleccionesModule)
+    },
+    {
+      path:'detalle',loadChildren:()=>import('./main-page/elecciones/DetalleEleccion/DetalleEleccion.module').then(m=>m.DetalleEleccionModule)
     }
-    
-    
   ]
-
-  }
+  
+  },
+  
 ];
 
 @NgModule({

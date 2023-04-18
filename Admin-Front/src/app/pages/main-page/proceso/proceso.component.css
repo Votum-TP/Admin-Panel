@@ -1,10 +1,11 @@
 .content-end {height: 100%; width: 1000px; background-color: #F0F8FF; padding: 25px;}
 .form-content {max-width: 60%; margin: auto;}
-.form {height: 100%; width: 99%;position: relative; background-color: white; border-radius: 8px;}
+.form {height: 100%; width: 99%;position: relative; background-color: white; border-radius: 8px;box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),0px 8px 10px 1px rgba(0, 0, 0, 0.14),0px 3px 14px 2px rgba(0, 0, 0, 0.12);}
 .date-columns {display: flex; gap: 50px;}
 .fecha {width: 200px;}
 .hidden {display: none;}
-textarea input label span p {font-family: Poppins;}
+textarea, input, label, span ,p, h1, h2, h3, h4 {font-family: Poppins;}
+
 /*INPUTS*/
 input, textarea, select {font-size: 0.8em; -webkit-appearance: none; -moz-appearance: none; border: none; line-height: initial !important;}
 input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), select, textarea {background-color: var(--white-color); border-radius: 8px;}
@@ -28,8 +29,11 @@ label {font-family: Poppins;}
 .file-upload .partidos-file-name ,.file-upload .votantes-file-name  {width: 70%; font-family: Poppins;}
 .file-upload .hidden {display: none;}
 .remove-file {background-color: #F45B69;cursor: pointer; border-radius: 8px;color: white;font-weight: 300;text-align: center;margin: auto;   font-family: 'Poppins';display: block;font-weight: 600;font-size: .8em;margin: auto;text-align: center; padding: 8px 20px 10px 15px;}
+.remove-file:hover {background-color: #f73d4d;}
 .button-upload{background-color: #3F468F;cursor: pointer; border-radius: 8px;color: white;font-weight: 300;text-align: center;margin: auto;padding: 2px 20px 1px 15px;}
+.button-upload:hover{background-color: #535bb9}
 .button-next{display: block;line-height: 35px;font-weight: 600;font-size: .8em; background-color: #F69447;cursor: pointer; border-radius: 8px;color: white;font-weight: 600;text-align: center;margin-top: 100px;float: right;width: 110px;position: absolute;bottom: 60px;right: 90px;}
+.button-next:hover{background-color: #fc7209}
 .button-back{display: block;line-height: 35px;font-weight: 600;font-size: .8em; ;cursor: pointer; border-radius: 8px;color: white;font-weight: 600;text-align: center;margin-top: 100px;float: right;width: 110px;position: absolute;bottom: 60px;left: 90px;}
 .button-back label {color: #F69447;font-weight: 600; cursor: pointer;}
 input, textarea, select {font-size: 0.8em; -webkit-appearance: none; -moz-appearance: none; border: none; line-height: initial !important;}

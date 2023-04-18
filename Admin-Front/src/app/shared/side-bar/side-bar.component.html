@@ -1,14 +1,14 @@
 <div class="screen" style="width: 100%; height: 100%; display: flex;">
     <div class="menu-bar">
       <div class="title-container">
-        <label>VOTUM</label>
+        <a class="icon-title"></a>
       </div>
         <div class="menu-options" >
             <div class="menu-option" (click)="registroNavigate()" >
                 <a class="icon icon-votantes"></a>
                 <label>Lista de votantes</label>
             </div>
-            <div class="menu-option">
+            <div class="menu-option" (click)="eleccionesNavigate()">
                 <a class="icon icon-elecciones" ></a>
                 <label>Elecciones</label>
             </div>
@@ -16,7 +16,7 @@
                 <a class="icon icon-proceso"></a>
                 <label>Proceso electoral</label>
             </div>
-            <div class="menu-option logout">
+            <div class="menu-option logout" (click)="cerrarSesionNavigate()">
                 <a class="icon icon-logout"></a>
                 <label>Cerrar sesión</label>
             </div>

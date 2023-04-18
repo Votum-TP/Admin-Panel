@@ -14,9 +14,15 @@ export class SideBarComponent implements OnInit {
   }
 
   registroNavigate(){
-    this.router.navigate(['/registro']);
+    this.router.navigate(['/Votum/registro']);
   }
   procesoNavigate(){
-    this.router.navigate(['/proceso']);
+    this.router.navigate(['/Votum/proceso']);
+  }
+  eleccionesNavigate(){
+    this.router.navigate(['/Votum/elecciones']);
+  }
+  cerrarSesionNavigate(){
+    this.router.navigate(['/']);
   }
 }

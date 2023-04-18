@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import axios from 'axios';
 import * as XLSX from 'xlsx'
+import { EleccionService } from 'src/app/services/eleccion/eleccion.service';
+
 
 @Component({
   selector: 'app-proceso',
@@ -10,7 +12,7 @@ import * as XLSX from 'xlsx'
 })
 export class ProcesoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service : EleccionService) { }
   public listNumbers1: any;
 
   ngOnInit(): void {
@@ -24,7 +26,11 @@ export class ProcesoComponent implements OnInit {
   name: string= '';
   fileVotantes: any;
   filePartidos: any;
-  ExcelData: any;
+  ExcelDataPartidos: any;
+  ExcelDataVotantes: any;
+  fileReaderPartidos: any;
+  fileReaderVotantes: any;
+
   partidos: any;
 
   drop($event: CdkDragDrop<number[]>){
@@ -55,7 +61,7 @@ export class ProcesoComponent implements OnInit {
   }
   secondPage(){
     
-    if($('.Nombre').val()==""||$('.Descripcion').val()==""||$('.fechaInicio').val()==""||$('.fechaFin').val()==""){
+    if($('.Nombre').val()==""||$('.Descripcion').val()==""||$('.FechaInicio').val()==""||$('.FechaFin').val()==""){
       $(".popup-title").html("Campos faltantes");
       var mensaje = "Falta completar campo(s) ";
       if($('.Nombre').val()==""){
@@ -64,10 +70,10 @@ export class ProcesoComponent implements OnInit {
       if($('.Descripcion').val()==""){
         mensaje = mensaje + " Descripción,";
       }
-      if($('.fechaInicio').val()==""){
+      if($('.FechaInicio').val()==""){
         mensaje = mensaje + " Fecha inicio,";
       }
-      if($('.fechaFin').val()==""){
+      if($('.FechaFin').val()==""){
         mensaje = mensaje + " FechaFin.";
       }
 
@@ -89,70 +95,72 @@ export class ProcesoComponent implements OnInit {
       $(".thirdPage").addClass("hidden");
       $(".secondPage").removeClass("hidden");
   }
+  
   thirdPage(){
+    var excelNoLeidoPartidos = false;
+    var excelNoLeidoVotantes = false;
+
+    //Validacion si los archivos no estan subidos
     if(this.fileVotantes== null || this.filePartidos==null){
+      var mensaje = "Falta cargar archivo(s)"
       $(".popup-title").html("Archivo(s) faltante(s)");
 
       if(this.fileVotantes== null){
-        $(".popup-description").html("Falta cargar el archivo de votantes pertenecientes a la elección");
+        mensaje=mensaje+" votantes pertenecientes a la elección,";
         $(".popup").addClass("active");
         $(".form").addClass("blur");
       }
       if(this.filePartidos== null){
-        $(".popup-description").html("Falta cargar el archivo de partidos pertenecientes a la elección");
+        mensaje=mensaje+" partidos pertenecientes a la elección,";
         $(".popup").addClass("active");
         $(".form").addClass("blur");
       }
-    }
-    //Lectura de excel de partidos
-    let fileReaderPartidos = new FileReader();
-    fileReaderPartidos.readAsBinaryString(this.filePartidos);
-    fileReaderPartidos.onload = (e) =>{
-      var workbook = XLSX.read(fileReaderPartidos.result,{type:'binary'});
-      var SheetNames = workbook.SheetNames;
-      console.log(SheetNames);
-      this.ExcelData = XLSX.utils.sheet_to_json(workbook.Sheets[SheetNames[0]])
-      console.log(this.ExcelData);
-      if(this.ExcelData.length >= 5){
-        $(".drag-drop-row").attr("style","overflow-y: scroll;height: "+55*7+"px")
+      if(mensaje.charAt(mensaje.length-1)==","){
+        mensaje = mensaje.slice(0, -1) + "."
       }
-    }
-    //Validacion del formato de excel de partidos
+      $(".popup-description").html(mensaje);
 
-    if(!this.ExcelData.hasOwnProperty('Nombre')||!this.ExcelData.hasOwnProperty('Descripcion')||!this.ExcelData.hasOwnProperty('Propuestas')||!this.ExcelData.hasOwnProperty('Imagen')||!this.ExcelData.hasOwnProperty('CodigoCandidato')||!this.ExcelData.hasOwnProperty('NombreRepresentante')){
-      $(".popup-title").html("Formato incorrecto");
-      $(".popup-description").html("Cargue un excel con el formato indicado para los partidos");
-      $(".popup").addClass("active");
-      $(".form").addClass("blur");
     }
-    //Lectura de excel de votantes
-
-    let fileReaderVotantes = new FileReader();
-    fileReaderVotantes.readAsBinaryString(this.filePartidos);
-    fileReaderVotantes.onload = (e) =>{
-      var workbook = XLSX.read(fileReaderVotantes.result,{type:'binary'});
-      var SheetNames = workbook.SheetNames;
-      console.log(SheetNames);
-      this.ExcelData = XLSX.utils.sheet_to_json(workbook.Sheets[SheetNames[0]])
-      console.log(this.ExcelData);
-      if(this.ExcelData.length >= 5){
-        $(".drag-drop-row").attr("style","overflow-y: scroll;height: "+55*7+"px")
+     
+       //Validacion del formato de excel de partidos
+       if(!this.ExcelDataPartidos[0].hasOwnProperty('Nombre')||!this.ExcelDataPartidos[0].hasOwnProperty('Descripcion')||!this.ExcelDataPartidos[0].hasOwnProperty('Propuestas')||!this.ExcelDataPartidos[0].hasOwnProperty('Imagen')||!this.ExcelDataPartidos[0].hasOwnProperty('CodigoCandidato')||!this.ExcelDataPartidos[0].hasOwnProperty('NombreRepresentante')){
+       $(".popup-title").html("Formato incorrecto");
+       $(".popup-description").html("Cargue un excel con el formato indicado para los partidos");
+       $(".popup").addClass("active");
+       $(".form").addClass("blur");
+       excelNoLeidoPartidos = true;
+      }else{
+        excelNoLeidoPartidos = false;
       }
-    }
-    //Validacion del formato de excel de votantes
+      console.log(this.ExcelDataPartidos[0]);
 
-    if(!this.ExcelData.hasOwnProperty('Codigo')){
-      $(".popup-title").html("Formato incorrecto");
-      $(".popup-description").html("Cargue un excel con el formato indicado para los electores");
-      $(".popup").addClass("active");
-      $(".form").addClass("blur");
-    }
+      //se valida que si el excel del partido no es leido no debe validar los siguiente
+      if(!excelNoLeidoPartidos)
+      {
+        //Validacion del formato de excel de votantes
 
-    $(".firstPage").addClass("hidden");
-    $(".secondPage").addClass("hidden");
+          if(!this.ExcelDataVotantes[0].hasOwnProperty('Codigo'))
+          {
+           $(".popup-title").html("Formato incorrecto");
+           $(".popup-description").html("Cargue un excel con el formato indicado para los votantes");
+           $(".popup").addClass("active");
+           $(".form").addClass("blur");
+            excelNoLeidoVotantes = true;
+          }else{
+            excelNoLeidoVotantes = false;
+          }
+      }
+        
+        
+      console.log(this.ExcelDataVotantes[0]);
 
-    $(".thirdPage").removeClass("hidden");
-   
+      if(!excelNoLeidoPartidos && !excelNoLeidoVotantes){
+        $(".firstPage").addClass("hidden");
+        $(".secondPage").addClass("hidden");
+  
+        $(".thirdPage").removeClass("hidden");
+      }
+    
   }
   
   getName( name: string){
@@ -165,7 +173,6 @@ export class ProcesoComponent implements OnInit {
     let reader = new FileReader();
     let listItem = document.createElement("div");
     let fileName =  this.fileVotantes.name;
-    console.log(this.fileVotantes);
     $(".votantes-file-name").val(fileName);
     let fileSize = parseInt((this.fileVotantes.size / 1024).toFixed(1));
     listItem.setAttribute("class","file-element");
@@ -179,8 +186,23 @@ export class ProcesoComponent implements OnInit {
     $(".votantes-upload").addClass("hidden");
     $(".votantes-remove").removeClass("hidden");
     $(".button-next-container").removeClass("hidden");
+
+    this.fileReaderVotantes = new FileReader();
+    this.fileReaderVotantes.readAsBinaryString(this.fileVotantes);
+
+    //Lectura de excel de votantes
+    this.fileReaderVotantes.onload = () =>{
+    var workbook = XLSX.read(this.fileReaderVotantes.result,{type:'binary'});
+    var SheetNames = workbook.SheetNames;
+    this.ExcelDataVotantes = XLSX.utils.sheet_to_json(workbook.Sheets[SheetNames[0]])
+    if(this.ExcelDataVotantes.length >= 5)
+      {
+        $(".drag-drop-row").attr("style","overflow-y: scroll;height: "+55*7+"px")
+      }
+    } 
   }
   removeFileVotantes(){
+      this.fileReaderVotantes = null;
       $(".votantes-file-name").val("");
       $(".votantes-remove").addClass("hidden");
       $(".votantes-upload").removeClass("hidden");
@@ -189,6 +211,7 @@ export class ProcesoComponent implements OnInit {
       this.fileVotantes =null;
       $(".inputfile").val("");
   }
+
   getFilePartidos( event: any){
     this.filePartidos = event.target.files[0];
     let fileList = document.getElementById("files-list-partidos")??new HTMLElement;
@@ -196,7 +219,6 @@ export class ProcesoComponent implements OnInit {
     let reader = new FileReader();
     let listItem = document.createElement("div");
     let fileName =  this.filePartidos.name;
-    console.log(this.filePartidos);
     $(".partidos-file-name").val(fileName);
     let fileSize = parseInt((this.filePartidos.size / 1024).toFixed(1));
     listItem.setAttribute("class","file-element");
@@ -210,8 +232,23 @@ export class ProcesoComponent implements OnInit {
     $(".partidos-upload").addClass("hidden");
     $(".partidos-remove").removeClass("hidden");
     $(".button-next-container").removeClass("hidden");
+
+      //Lectura de excel de partidos
+      this.fileReaderPartidos = new FileReader();
+      this.fileReaderPartidos.readAsBinaryString(this.filePartidos);
+
+      this.fileReaderPartidos.onload = () =>{
+      var workbook = XLSX.read(this.fileReaderPartidos.result,{type:'binary'});
+      var SheetNames = workbook.SheetNames;
+      this.ExcelDataPartidos = XLSX.utils.sheet_to_json(workbook.Sheets[SheetNames[0]])
+
+      if(this.ExcelDataPartidos.length >= 5){
+        $(".drag-drop-row").attr("style","overflow-y: scroll;height: "+55*7+"px")
+      }
+      }
   }
   removeFilePartidos(){
+      this.fileReaderPartidos = null
       $(".partidos-file-name").val("");
       $(".partidos-remove").addClass("hidden");
       $(".partidos-upload").removeClass("hidden");
@@ -231,38 +268,36 @@ export class ProcesoComponent implements OnInit {
 
   GuardarEleccion(){
  
-    alert();
     let formData = new FormData();
+    let nombre = $(".Nombre").val()?.toString()??"";
+    let fechaInicio = $(".FechaInicio").val()?.toString()??"";
+    let fechaFin = $(".FechaFin").val()?.toString()??"";
+    let description = $('.Descripcion').val()?.toString()??"";
+    console.log(description);
+    console.log(1);
 
-    formData.append('Nombre',"prueba")
-    formData.append('FechaInicio',"22/10/1999")
-    formData.append('FechaFin',"23/10/1999")
+
+    formData.append('Nombre',nombre)
+    formData.append('FechaInicio',fechaInicio)
+    formData.append('FechaFin',fechaFin)
+    formData.append('Descripcion',description)
     formData.append('files', this.fileVotantes)
    
-   for (let i = 0; i < this.ExcelData.length; i++) {
-      formData.append('partidos['+i+'].Nombre',this.ExcelData[i].Nombre)
-      formData.append('partidos['+i+'].Descripcion',this.ExcelData[i].Descripcion)
-      formData.append('partidos['+i+'].Propuestas',this.ExcelData[i].Propuestas)
-      formData.append('partidos['+i+'].Imagen',this.ExcelData[i].Imagen)
-      formData.append('partidos['+i+'].CodigoCandidato',this.ExcelData[i].CodigoCandidato)
+   for (let i = 0; i < this.ExcelDataPartidos.length; i++) {
+      formData.append('partidos['+i+'].Nombre',this.ExcelDataPartidos[i].Nombre)
+      formData.append('partidos['+i+'].Descripcion',this.ExcelDataPartidos[i].Descripcion)
+      formData.append('partidos['+i+'].Propuestas',this.ExcelDataPartidos[i].Propuestas)
+      formData.append('partidos['+i+'].Imagen',this.ExcelDataPartidos[i].Imagen)
+      formData.append('partidos['+i+'].CodigoCandidato',this.ExcelDataPartidos[i].CodigoCandidato)
     }
-
-    // formData.append('name',file)
-
-    var response =  axios({
-    url: "https://localhost:7101/api/Elecciones/CrearEleccion",
-    method: "POST",
-    headers:{
-      'Content-Type': 'multipart/form-data'
-    },
-    data: formData
-  }).then(function (response) {
-    console.log(response);
+    console.log(formData);
     
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    this.service.postEleccion(formData);
+
   }
 
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 }
