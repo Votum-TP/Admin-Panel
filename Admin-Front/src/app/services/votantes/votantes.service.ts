@@ -6,8 +6,8 @@ import axios from 'axios';
 })
 export class VotantesService {
 
- private API = "https://localhost:7101/api/";
- //   private API = "http://votumproject-001-site1.etempurl.com/api/";
+ //private API = "https://localhost:7101/api/";
+    private API = "http://votumproject-001-site1.etempurl.com/api/";
 
 
 constructor() { }
