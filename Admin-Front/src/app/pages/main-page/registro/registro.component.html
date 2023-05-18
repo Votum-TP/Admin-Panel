@@ -1,0 +1,43 @@
+<div class="content-end" >
+    <div class="form">
+        <div class="step-bar" style="height: 100px;">
+        </div>
+        <div class="form-content">
+            <form id="frmCrearActualizarCategoria" class="popup-form" method="post" onsubmit="return crearActualizarCategoria(this);" enctype="multipart/form-data">
+                <div class="form-field">
+                    <label class="left">Cargar electores</label>
+                    <input id="file-electores" type="file"  class="inputfile" (change)="getFile($event)"  accept=".xlsx, .xls, .csv"/>
+                    <div class="file-upload">
+                        <input type="text" class="file-name" id="file-name"disabled>
+                        <label for="file-electores"  class="button-upload">&nbsp; Subir archivo</label>
+                        <div for="file-electores" (click)="removeFile()" class="hidden remove-file ">&nbsp; Remover archivo</div>
+                    </div>
+                    <div id="files-list" class="files-list">
+                    </div>
+                    <div class="button-next-container hidden">
+                      <div (click)="uploadFile()" class="hidden button-next ">&nbsp;Guardar</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="opacity-active"></div>
+    <div class="popup center">
+    <!-- <div class="icon">
+      <i class="fa fa-check"></i>
+    </div> -->
+      <div class="popup-title">
+      </div>
+      <div class="popup-description">
+      </div>
+      <div class="dismiss-btn">
+        <button id="dismiss-popup-btn" (click)="closePopUp()">
+          Aceptar
+        </button>
+      </div>
+    </div>
+
+</div>
+
+
+<script src="upload-button.js"></script>

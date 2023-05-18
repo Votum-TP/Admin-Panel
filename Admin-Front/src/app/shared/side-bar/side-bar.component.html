@@ -1,21 +1,38 @@
 <div class="screen" style="width: 100%; height: 100%; display: flex;">
     <div class="menu-bar">
       <div class="title-container">
-        <label>VOTUM</label>
+        <a class="icon-title"></a>
       </div>
         <div class="menu-options" >
-            <div class="menu-option" >
-                <a class="icon-votantes"></a>
+            <div class="menu-option" (click)="registroNavigate()" >
+                <a class="icon icon-votantes"></a>
                 <label>Lista de votantes</label>
             </div>
-            <div class="menu-option">
-                <a class="icon-elecciones" ></a>
+<<<<<<< HEAD
+            <div class="menu-option" (click)="eleccionesNavigate()">
+=======
+            <div class="menu-option"  (click)="eleccionesNavigate()">
+>>>>>>> be75b004aedbd172099b953a5fcbefd3ca1c1048
+                <a class="icon icon-elecciones" ></a>
                 <label>Elecciones</label>
             </div>
-            <div class="menu-option">
-                <a class="icon-proceso"></a>
+            <div class="menu-option" (click)="procesoNavigate()">
+                <a class="icon icon-proceso"></a>
                 <label>Proceso electoral</label>
             </div>
+            <div class="menu-option" (click)="auditarVotoNavigate()">
+                <a class="icon icon-proceso"></a>
+                <label>Auditar votos</label>
+            </div>
+            <div class="menu-option " (click)="administradoresNavigate()">
+                <a class="icon icon-proceso"></a>
+                <label>Administradores</label>
+            </div>
+            <div class="menu-option logout" (click)="cerrarSesionNavigate()">
+                <a class="icon icon-logout"></a>
+                <label>Cerrar sesión</label>
+            </div>
+           
         </div>
         <div>
 

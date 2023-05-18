@@ -1,29 +1,108 @@
 <div class="content-end" >
     <div class="form">
-        <div class="step-bar" style="height: 100px;">
-
+        <div class="step-bar" style="height: 60px;">
         </div>
+        <div class="firstPage">
         <div class="form-content">
-            <form id="frmCrearActualizarCategoria" class="popup-form" method="post" onsubmit="return crearActualizarCategoria(this);" enctype="multipart/form-data">
+            <form id="fmrEleccion1" class="popup-form" method="post" onsubmit="return crearActualizarCategoria(this);" enctype="multipart/form-data">
                 <div class="form-field">
-                    <label class="left">Nombre ()</label>
-                    <input type="text"  class="nom" id="id" name="Codigo" id="CodigoCategoriaCrearActualizar" value="" placeholder="Codigo" />
+                    <label for="Nombre" class="left">Nombre (*)</label>
+                    <input  required id="Nombre" type="text"  class="Nombre"  name="Nombre" value="" placeholder="Nombre" />
                 </div>
                 <div class="form-field">
-                    <label class="left">Descripción</label>
-                    <textarea name="Descripcion" id="DescripcionCategoriaCrearActualizar" value="" placeholder="Breve descripcion"></textarea>
+                    <label class="left">Descripción (*)</label>
+                    <textarea  id="Descripcion" class="Descripcion"  placeholder="Descripcion"></textarea>
                 </div>
                 <div class="date-columns">
                     <div class="form-field">
-                        <label class="fecha">Fecha de inicio ()</label>
-                        <input type="date" id="start" name="trip-start"value="2018-07-22"min="2018-01-01" max="2018-12-31">
+                        <label class="fecha">Fecha de inicio (*)</label>
+                        <input required type="date" class="FechaInicio" name="trip-start"value="2023-03-20">
                     </div>
                     <div class="form-field">
                        <label class="fecha">Fecha de fin (*)</label>
-                       <input type="date" id="start" name="trip-start"value="2018-07-22"min="2018-01-01" max="2018-12-31">
+                       <input required type="date" class="FechaFin" name="trip-start"value="2023-03-20">
                    </div>
                 </div>
             </form>
+            
         </div>
+        <div class="button-next-container ">
+            <div  (click)="secondPage()" class="button-next ">&nbsp;Siguiente</div>
+        </div>
+        </div>
+        <div class="secondPage hidden">
+            <div class="form-content">
+                <form id="frmCrearActualizarCategoria" class="popup-form" method="post" onsubmit="return crearActualizarCategoria(this);" enctype="multipart/form-data">
+                    <div class="files">
+                    <div class="form-field">
+                        <label class="left">Padron de votantes</label>
+                        <input id="file-electores" type="file"  class="inputfile" (change)="getFileVotantes($event)"  accept=".xlsx, .xls, .csv"/>
+                        <div class="file-upload">
+                            <input type="text" class="votantes-file-name" id="file-name"disabled>
+                            <label for="file-electores"  class="button-upload votantes-upload">&nbsp; Subir archivo</label>
+                            <div for="file-electores" (click)="removeFileVotantes()" class="hidden remove-file votantes-remove">&nbsp; Remover archivo</div>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label class="left">Padrón de partidos</label>
+                        <input id="file-partidos" type="file"  class="inputfile" (change)="getFilePartidos($event)"  accept=".xlsx, .xls, .csv"/>
+                        <div class="file-upload">
+                            <input type="text" class="partidos-file-name" id="file-name"disabled>
+                            <label for="file-partidos"  class="button-upload partidos-upload">&nbsp; Subir archivo</label>
+                            <div for="file-partidos" (click)="removeFilePartidos()" class="hidden remove-file partidos-remove ">&nbsp; Remover archivo</div>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="files-list-votantes" class="files-list"></div>
+                    <div id="files-list-partidos" class="files-list"></div>
+                </form>
+            </div>
+            <div class="button-next-container ">
+                <div  (click)="firstPage()" class="button-back ">&nbsp;<label>Atrás</label></div>
+                <div  (click)="thirdPage()" class="button-next ">&nbsp;Siguiente</div>
+            </div>
+        </div>
+        <div class="thirdPage hidden">
+            <div class="drag-drop">
+                <div class="drag-drop-row">
+                <div cdkDropList
+                  class="col-6"
+                  #ln1="cdkDropList"
+                  [cdkDropListData]="ExcelDataPartidos"
+                  
+                  (cdkDropListDropped)="drop($event)">
+                  <div cdkDrag class=" drag-drop-elements" *ngFor="let n of ExcelDataPartidos">
+                    <a><img src={{n.Imagen}} style="width:45px;height:45px;"></a>
+                    <div class="partido-info">
+                        <label>{{n.Nombre}}</label>
+                        <label>Representante: {{n.NombreRepresentante}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="button-next-container ">
+                <div  (click)="secondPageBack()" class="button-back ">&nbsp;<label>Atrás</label></div>
+                <div  (click)="GuardarEleccion()" class="button-next ">&nbsp;Guardar</div>
+            </div>
+        </div>
+        <!-- <div class="button-next-container ">
+            <div  (click)="secondPage()" class="button-next ">&nbsp;Siguiente</div>
+        </div> -->
     </div>
+    <div class="popup center">
+        <!-- <div class="icon">
+          <i class="fa fa-check"></i>
+        </div> -->
+          <div class="popup-title">
+          </div>
+          <div class="popup-description">
+          </div>
+          <div class="dismiss-btn">
+            <input class="button-action-pop" type="hidden"/>
+            <button id="dismiss-popup-btn" (click)="closePopUp()" >
+              Aceptar
+            </button>
+          </div>
+        </div>
 </div>

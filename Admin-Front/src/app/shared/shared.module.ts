@@ -8,11 +8,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     SideBarComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   exports:[
     NavbarComponent,
-    SideBarComponent
+    SideBarComponent,
   ],
   imports: [
     CommonModule

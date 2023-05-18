@@ -1,0 +1,40 @@
+<div class="content-end" >
+  <div class="form">
+    <div class="actions">
+      <h1 class="title"></h1>
+      <button (click)="cambiarEstado()"  class=" button-action-eleccion "></button>
+    </div>
+  <p class="descripcion"></p>
+  <label class="fecha"></label>
+  <div class="resultados">
+    <ngx-charts-bar-vertical
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)">
+  </ngx-charts-bar-vertical>
+  </div>
+</div>
+<div class="popup center">
+  <!-- <div class="icon">
+    <i class="fa fa-check"></i>
+  </div> -->
+    <div class="popup-title">
+    </div>
+    <div class="popup-description">
+    </div>
+    <div class="dismiss-btn">
+      <button id="dismiss-popup-btn" (click)="closePopUp()">
+        Aceptar
+      </button>
+    </div>
+  </div>
+</div>
