@@ -1,13 +1,40 @@
-<div class="left-form">
- <h2>VOTUM</h2>
+<div style="height: 70px;"></div>
+<div class="container" id="container">
+	<div class="form-container sign-in-container">
+		<div class="form" >
+			<h1>Sign in</h1>
+			<div class="social-container">
+			</div>
+			<input type="email" class="CodigoAlumno" placeholder="Codigo de alumno" />
+			<input type="password" class="Contrasena" placeholder="Contraseña" />
+			<a ></a>
+			<button (click)="Login()">Sign In</button>
+		</div>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<button class="ghost"  id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<a class="icon-title"></a>
+				<a class="icon-logo-Login"></a>
+			</div>
+		</div>
+	</div>
+	<div class="popup center">
+        <!-- <div class="icon">
+          <i class="fa fa-check"></i>
+        </div> -->
+          <div class="popup-title">
+          </div>
+          <div class="popup-description">
+          </div>
+          <div class="dismiss-btn">
+            <button id="dismiss-popup-btn" (click)="closePopUp()">
+              Aceptar
+            </button>
+          </div>
+        </div>
 </div>
-<div class="right-form">
-    <form autocomplete="off" [formGroup]="login" (ngSubmit)="Login()">
-        <h2>INICIAR SESIÓN</h2>
-        <label for="user"> Email:</label>
-        <input type="email" formControlName="email" placeholder="email" id="email">
-        <label for="password"> Password:</label>
-        <input type="password" formControlName="password" placeholder="password" id="password">
-        <button type="submit">Sign in</button>
-    </form>
-</div>
+

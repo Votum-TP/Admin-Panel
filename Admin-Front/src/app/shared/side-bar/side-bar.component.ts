@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  registroNavigate(){
+    this.router.navigate(['/Votum/registro']);
+  }
+  procesoNavigate(){
+    this.router.navigate(['/Votum/proceso']);
+  }
+  eleccionesNavigate(){
+    this.router.navigate(['/Votum/elecciones']);
+  }
+  auditarVotoNavigate(){
+    this.router.navigate(['/Votum/elecciones/auditarVoto']);
+  }
+  administradoresNavigate(){
+    this.router.navigate(['/Votum/administradores']);
+  }
+  cerrarSesionNavigate(){
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
+  eleccionesNavigate(){
+    this.router.navigate(['/listado']);
+  }
 }
