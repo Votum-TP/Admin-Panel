@@ -15,6 +15,7 @@ const routes: Routes = [
       path: 'registro', loadChildren:()=> import('./main-page/registro/registro.module').then(m=>m.RegistroModule)
     },
     {
+<<<<<<< HEAD
       path: 'elecciones', loadChildren:()=> import('./main-page/elecciones/elecciones.module').then(m=>m.EleccionesModule)
     },
     {
@@ -29,6 +30,10 @@ const routes: Routes = [
     {
       path:'administradores/CrearAdministrador',loadChildren:()=>import('./main-page/admins/administradores/administradores-routing.module').then(m=>m.AdministradoresRoutingModule)
     }
+=======
+      path: 'listado',loadChildren:()=> import('./main-page/listado/listado.module').then(m=>m.ListadoModule)
+    } 
+>>>>>>> be75b004aedbd172099b953a5fcbefd3ca1c1048
   ]
   
   },
