@@ -14,8 +14,4 @@ body {
     height: 100vh;
 }
 html, body { height: 100%; }
-<<<<<<< HEAD
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;overflow: hidden; }
-=======
-body { margin: 0; font-family: 'Poppins'; }
->>>>>>> be75b004aedbd172099b953a5fcbefd3ca1c1048

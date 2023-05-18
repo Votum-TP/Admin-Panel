@@ -32,7 +32,5 @@ export class SideBarComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/']);
   }
-  eleccionesNavigate(){
-    this.router.navigate(['/listado']);
-  }
+ 
 }
