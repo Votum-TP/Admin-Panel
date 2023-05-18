@@ -16,10 +16,19 @@
                 <a class="icon icon-proceso"></a>
                 <label>Proceso electoral</label>
             </div>
+            <div class="menu-option" (click)="auditarVotoNavigate()">
+                <a class="icon icon-proceso"></a>
+                <label>Auditar votos</label>
+            </div>
+            <div class="menu-option " (click)="administradoresNavigate()">
+                <a class="icon icon-proceso"></a>
+                <label>Administradores</label>
+            </div>
             <div class="menu-option logout" (click)="cerrarSesionNavigate()">
                 <a class="icon icon-logout"></a>
                 <label>Cerrar sesión</label>
             </div>
+           
         </div>
         <div>
 

@@ -4,5 +4,6 @@ export class EleccionResponse {
     Estado : string;
     FechaInicio : string;
     Ganador : string;
+    Descripcion: string
 
 }

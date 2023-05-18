@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-.menu-bar{width: 350px; height: 100%; border: 2px solid #ddd}
+.menu-bar{width: 290px; height: 100%; border: 2px solid #ddd}
 .title-container{margin-top: 30px; position: relative;}
 .title-container label{ font-family: Poppins;font-style: normal;font-weight: 900; color: #0A7BC1; font-size: 2.0rem;line-height: 64px;display: block;position: absolute;top: 25px;left: 35px;}
 .menu-options { height: 66%; width: 100%; padding: 40px 8px 8px 8px;}
@@ -14,4 +14,4 @@
 .icon-elecciones {background-image:url('../../../assets/elecciones_black.svg'); }
 .icon-proceso {background-image:url('../../../assets/proceso_electoral_black.svg');}
 .icon-logout {background-image:url('../../../assets/logout_black.svg');}
-.logout {margin-top: 200px;}
+.logout {margin-top: 60px;}

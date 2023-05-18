@@ -22,7 +22,14 @@ export class SideBarComponent implements OnInit {
   eleccionesNavigate(){
     this.router.navigate(['/Votum/elecciones']);
   }
+  auditarVotoNavigate(){
+    this.router.navigate(['/Votum/elecciones/auditarVoto']);
+  }
+  administradoresNavigate(){
+    this.router.navigate(['/Votum/administradores']);
+  }
   cerrarSesionNavigate(){
+    localStorage.clear();
     this.router.navigate(['/']);
   }
 }

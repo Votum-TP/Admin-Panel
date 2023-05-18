@@ -6,8 +6,8 @@ import axios from 'axios';
 })
 export class VotantesService {
 
-  private API = "https://localhost:7101/api/";
-  // private API = "http://egopro1-001-site1.btempurl.com/api/";
+ private API = "https://localhost:7101/api/";
+ //   private API = "http://votumproject-001-site1.etempurl.com/api/";
 
 
 constructor() { }
@@ -19,7 +19,7 @@ public postVotante(formData: any){
     method: "POST",
     headers:{
       'Content-Type': 'multipart/form-data',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDb2RpZ29Vc3VhcmlvIjoic3RyaW5nIiwianRpIjoiZDI4YWRkNGMtZmRhMS00MmMxLThjOWMtMWRhYzgyMzc2OGM5IiwiRGF0ZUdlbmVyYXRlZCI6IjE3LzA0LzIwMjMgMTM6NTk6MjYiLCJleHAiOjE2ODQzMzE5NjZ9.kkWyLIA4LMaxm6mcIUqnrXfwFfEE47AnUUOKLfl79hs'
+      'Authorization': 'Bearer '+localStorage.getItem("token")
     },
     data: formData
   }).then(function (response) {

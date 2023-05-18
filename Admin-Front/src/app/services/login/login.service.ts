@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class LoginService {
 
 
-  private API = "https://localhost:7101/api/";
-  // private API = "http://egopro1-001-site1.btempurl.com/api/";
+// private API = "https://localhost:7101/api/";
+    private API = "http://votumproject-001-site1.etempurl.com/api/";
 constructor(private router : Router) { }
 
 public IniciarSesion(codigoUsuario: string, contrasena: string){
@@ -32,6 +32,9 @@ public IniciarSesion(codigoUsuario: string, contrasena: string){
     console.log(response);
     if(response.data.code == 200){
       console.log(response);
+      localStorage.setItem("token",response.data.token);
+      localStorage.setItem("codigoUsuario",response.data.codigo);
+
       self.navigateByUrl("/Votum/elecciones");
 
     }else{

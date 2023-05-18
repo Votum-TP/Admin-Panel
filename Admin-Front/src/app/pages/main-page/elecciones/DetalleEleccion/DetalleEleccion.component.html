@@ -1,8 +1,11 @@
 <div class="content-end" >
   <div class="form">
-  <h1 class="title">Eleccion 1</h1>
-  <p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus dictum dui, in egestas velit fringilla consequat. Nunc consectetur risus a felis egestas pulvinar. Suspendisse luctus scelerisque sem, ullamcorper facilisis nisi consequat in. Cras venenatis nec sapien sit amet bibendum. Curabitur tempus facilisis enim, non placerat felis rhoncus nec. Donec dictum erat a mauris ultricies, vitae ultricies purus varius. Etiam porttitor leo sem, et lobortis mi pulvinar at. Sed ligula dolor, tempor eu ultricies eu, maximus convallis lorem. Sed tincidunt nec nisi ac feugiat. Morbi fringilla rhoncus tellus, eu dictum eros dapibus vitae. Sed id convallis augue, nec mollis velit.</p>
-  <label class="fecha">02/10/2029 - 30/11/2023</label>
+    <div class="actions">
+      <h1 class="title"></h1>
+      <button (click)="cambiarEstado()"  class=" button-action-eleccion "></button>
+    </div>
+  <p class="descripcion"></p>
+  <label class="fecha"></label>
   <div class="resultados">
     <ngx-charts-bar-vertical
     [view]="view"
@@ -20,4 +23,18 @@
   </ngx-charts-bar-vertical>
   </div>
 </div>
+<div class="popup center">
+  <!-- <div class="icon">
+    <i class="fa fa-check"></i>
+  </div> -->
+    <div class="popup-title">
+    </div>
+    <div class="popup-description">
+    </div>
+    <div class="dismiss-btn">
+      <button id="dismiss-popup-btn" (click)="closePopUp()">
+        Aceptar
+      </button>
+    </div>
+  </div>
 </div>

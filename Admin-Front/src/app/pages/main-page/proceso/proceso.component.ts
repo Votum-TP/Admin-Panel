@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as XLSX from 'xlsx'
 import { EleccionService } from 'src/app/services/eleccion/eleccion.service';
 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-proceso',
@@ -12,7 +13,7 @@ import { EleccionService } from 'src/app/services/eleccion/eleccion.service';
 })
 export class ProcesoComponent implements OnInit {
 
-  constructor(private service : EleccionService) { }
+  constructor(private service : EleccionService,private router : Router) { }
   public listNumbers1: any;
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class ProcesoComponent implements OnInit {
   ExcelDataVotantes: any;
   fileReaderPartidos: any;
   fileReaderVotantes: any;
-
+  numberPage: number = 1 ;
   partidos: any;
 
   drop($event: CdkDragDrop<number[]>){
@@ -54,13 +55,14 @@ export class ProcesoComponent implements OnInit {
   }
 
   firstPage(){
+    this.numberPage = 1
     $(".secondPage").addClass("hidden");
     $(".thirdPage").addClass("hidden");
 
     $(".firstPage").removeClass("hidden");
   }
   secondPage(){
-    
+    this.numberPage = 2
     if($('.Nombre').val()==""||$('.Descripcion').val()==""||$('.FechaInicio').val()==""||$('.FechaFin').val()==""){
       $(".popup-title").html("Campos faltantes");
       var mensaje = "Falta completar campo(s) ";
@@ -91,12 +93,14 @@ export class ProcesoComponent implements OnInit {
     }
   }
   secondPageBack(){
+    this.numberPage = 2
       $(".firstPage").addClass("hidden");
       $(".thirdPage").addClass("hidden");
       $(".secondPage").removeClass("hidden");
   }
   
   thirdPage(){
+    this.numberPage = 3
     var excelNoLeidoPartidos = false;
     var excelNoLeidoVotantes = false;
 
@@ -264,6 +268,9 @@ export class ProcesoComponent implements OnInit {
   closePopUp(){
     $(".popup").removeClass("active");
     $(".form").removeClass("blur");
+    if($(".button-action-pop").val()== 1){
+      this.router.navigateByUrl("/Votum/elecciones");
+    }
   }
 
   GuardarEleccion(){

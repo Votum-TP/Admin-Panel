@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from 'node_modules/@angular/common/http/'
 import axios, { AxiosResponse } from 'axios';
-import {EleccionResponse} from 'src/app/classes/EleccionResponse'
+import {AdminResponse} from 'src/app/classes/AdminResponse'
 import {PartidoGraphicResponse,EleccionGraphicResponse} from 'src/app/classes/PartidoGraphicResponse'
 import { Router } from '@angular/router';
 import {Observable} from 'rxjs'
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
-export class EleccionService {
+export class AdminsService {
 
  private API = "https://localhost:7101/api/";
    // private API = "http://egopro1-001-site1.btempurl.com/api/";
@@ -17,40 +17,14 @@ export class EleccionService {
 
 constructor(private http : HttpClient,private router : Router) { }
 
-public postEleccion(formData: any){
-  var self = this.router;
-  var response =  axios({
-    url: this.API + "Elecciones/CrearEleccion",
-    method: "POST",
-    headers:{
-      'Content-Type': 'multipart/form-data',
-      'Authorization': 'Bearer '+localStorage.getItem("token")
 
-    },
-    data: formData
-  }).then(function (response) {
-    console.log(response);
-    if(response.data.code == 200){
-      $(".button-action-pop").val(1);
-      $(".popup-title").html("¡Guardado exitoso!");
-    }else{
-      $(".popup-title").html("Error en el guardado");
-    }
-    $(".popup").addClass("active");
-    $(".form").addClass("blur");
-    $(".popup-description").html(response.data.mensaje);
-  
-  })
-  .catch(function (error) {
-  });
-}
-public iniciarEleccion(idEleccion: any){
+public crearAdministrador(codigo: any){
   var data ={
-    "IdEleccion":idEleccion,
+    "Codigo":codigo,
   }
   var self = this.router;
   var response =  axios({
-    url: this.API + "Elecciones/CambioEstadoEleccionIniciado",
+    url: this.API + "Administradores/CrearAdministrador",
     method: "POST",
     headers:{
       'Content-Type': 'application/json',
@@ -60,27 +34,27 @@ public iniciarEleccion(idEleccion: any){
   }).then(function (response) {
     console.log(response);
     if(response.data.code == 200){
-      $(".popup-title").html("¡Inicialización exitosa!");
+      $(".popup-title").html("¡Creación de administrador exitosa!");
 
     }else{
       $(".popup-title").html("Error en el cambio de estado");
     }
     $(".popup").addClass("active");
     $(".form").addClass("blur");
-    $(".popup-description").html(response.data.mensaje);
+    $(".popup-description").html("Se envió un correo a todos los administradores como constancia de la creación del nuevo administrador");
   
   })
   .catch(function (error) {
   });
 }
 
-public finalizarEleccion(idEleccion: any){
+public EliminarAdministrador(IdAdministrador: any){
   var data ={
-    "IdEleccion":idEleccion,
+    "IdAdministrador":IdAdministrador,
   }
   var self = this.router;
   var response =  axios({
-    url: this.API + "Elecciones/CambioEstadoEleccionTerminado",
+    url: this.API + "Administradores/EliminarAdministrador",
     method: "POST",
     headers:{
       'Content-Type': 'application/json',
@@ -90,33 +64,26 @@ public finalizarEleccion(idEleccion: any){
   }).then(function (response) {
     console.log(response);
     if(response.data.code == 200){
-      $(".popup-title").html("¡Finalización exitosa!");
-
+      $(".popup-title").html("Eliminación de administrador exitosa!");
+      this.self.navigate(['/Votum/administradores']);
     }else{
       $(".popup-title").html("Error en el cambio de estado");
     }
     $(".popup").addClass("active");
     $(".form").addClass("blur");
-    $(".popup-description").html(response.data.mensaje);
+    $(".popup-description").html("Se envió un correo a todos los administradores como constancia de la eliminación del nuevo administrador");
   })
   .catch(function (error) {
   });
 }
-public  GetElecciones() : Observable<EleccionResponse[]>{
-  return this.http.get<EleccionResponse[]>(this.API + 'Elecciones/ListarElecciones', {
+public GetAdministradores() : Observable<AdminResponse[]>{
+  return this.http.get<AdminResponse[]>(this.API + 'Administradores', {
     headers: {
       'Authorization': 'Bearer '+localStorage.getItem("token")
     }
   });
 }
-public  GetEleccion(idEleccion: any) : Observable<EleccionGraphicResponse>{
-  var response= this.http.get<EleccionGraphicResponse>(this.API + 'Elecciones/DetalleEleccion/'+idEleccion, {
-    headers: {
-      'Authorization': 'Bearer '+localStorage.getItem("token")
-    }
-  });
-  return response;
-}
+
 // public GetEleccion (idEleccion: any): any {
 //   var response =  axios({
 //     // url: "http://egopro1-001-site1.btempurl.com/api/Votantes/CargarParticipantes",
